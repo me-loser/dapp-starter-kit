@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+/* Wallet */
+
+.wallet-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.wallet-btn,
+.install-link {
+  border: none;
+  padding: 10px 16px;
+  background-color: #e8b059;
+  border-radius: 4px;
+  color: #202020;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* .wallet-details {
+  margin-bottom: 1rem;
+} */
+.wallet-details > h3,
+.wallet-details > p {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--Text);
+}
+.wallet-details > p > span,
+.wallet-details > h3 > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--Text);
+}
+.wallet-details > h3 {
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+}
+
+/* Spinner */
+
+.spin {
+  position: relative;
+}
+.spin {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px #202020;
+  border-bottom-color: #e8b059;
+  border-radius: 50%;
+  content: "";
+  height: 30px;
+  width: 30px;
+  margin: 0 2rem;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
