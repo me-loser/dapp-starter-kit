@@ -28,11 +28,17 @@ export default function Wallet() {
         method: "eth_getBalance",
         params: [accounts[0], "latest"],
       });
+      const balanceInEther = parseInt(balance, 16) / 10 ** 18;
       const chainId = await window.ethereum.request({
         method: "eth_chainId",
       });
 
-      dispatch({ type: "connect", wallet: accounts[0], balance, chainId });
+      dispatch({
+        type: "connect",
+        wallet: accounts[0],
+        balance: balanceInEther.toFixed(4),
+        chainId: parseInt(chainId).toString(),
+      });
 
       listen();
     }

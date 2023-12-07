@@ -12,17 +12,23 @@ export const useContract = () => {
 export const ContractProvider = ({ children }) => {
   const [lock, setLock] = useState(null);
   const { state } = useMetamask();
-  const { wallet, isMetamaskInstalled } = state;
+  const { wallet, isMetamaskInstalled, chainId } = state;
   useEffect(() => {
     if (!lock) {
       if (isMetamaskInstalled) {
         const contractInstance = new ContractInteractions(config);
+        contractInstance.wallet(wallet);
         setLock(contractInstance);
       }
     } else if (wallet) {
       lock.wallet(wallet);
     }
-  }, [isMetamaskInstalled, wallet]);
+    if (chainId) {
+      const contractInstance = new ContractInteractions(config);
+      contractInstance.wallet(wallet);
+      setLock(contractInstance);
+    }
+  }, [isMetamaskInstalled, wallet, chainId]);
 
   return (
     <ContractContext.Provider value={lock}>{children}</ContractContext.Provider>

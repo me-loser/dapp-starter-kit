@@ -1,8 +1,4 @@
 {
-  "contractAddress": {
-    "matic": "0x4EE0B4E6B8cafB44bDE1B8555C0C7e9Ff01bA16f",
-    "filecoin": "0x9a9a64511b8e610c82c97feea8936d85ed0ac5b5"
-  },
   "abi": [
     {
       "inputs": [

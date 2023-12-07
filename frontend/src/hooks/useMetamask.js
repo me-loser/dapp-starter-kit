@@ -24,6 +24,7 @@ function metamaskReducer(state, action) {
     }
     case "pageLoaded": {
       const { isMetamaskInstalled, balance, wallet, chainId } = action;
+      console.log(isMetamaskInstalled, balance, wallet, chainId);
       return {
         ...state,
         isMetamaskInstalled,
@@ -45,6 +46,14 @@ function metamaskReducer(state, action) {
         window.ethereum.removeAllListeners(["accountsChanged"]);
       }
       return { ...state, wallet: null, balance: null, chainId: null };
+    }
+    case "chainChanged": {
+      const { chainId, balance } = action;
+      const newState = { ...state, chainId, balance, status: "idle" };
+      const info = JSON.stringify(newState);
+      console.log(newState);
+      window.localStorage.setItem("metamaskState", info);
+      return newState;
     }
     case "changeChain": {
       const { chainId } = action;

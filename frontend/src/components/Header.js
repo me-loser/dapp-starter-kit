@@ -21,11 +21,17 @@ const Header = () => {
         listen();
       }
 
-      const { wallet, balance } = local
+      const { wallet, balance, chainId } = local
         ? JSON.parse(local)
         : { wallet: null, balance: null };
 
-      dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance });
+      dispatch({
+        type: "pageLoaded",
+        isMetamaskInstalled,
+        wallet,
+        balance,
+        chainId,
+      });
     }
   }, []);
   return (

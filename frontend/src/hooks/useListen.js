@@ -10,19 +10,35 @@ export const useListen = () => {
           method: "eth_getBalance",
           params: [newAccounts[0], "latest"],
         });
+        const balanceInEther = parseInt(newBalance, 16) / 10 ** 18;
         const newChainId = await window.ethereum?.request({
           method: "eth_chainId",
         });
-        console.log(newChainId);
+
         dispatch({
           type: "connect",
           wallet: newAccounts[0],
-          balance: newBalance,
-          chianId: newChainId,
+          balance: balanceInEther.toFixed(4),
+          chianId: parseInt(newChainId).toString(),
         });
       } else {
         dispatch({ type: "disconnect" });
       }
+    });
+    window.ethereum.on("chainChanged", async (newChainId) => {
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const newBalance = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [accounts[0], "latest"],
+      });
+      const balanceInEther = parseInt(newBalance, 16) / 10 ** 18;
+      dispatch({
+        type: "chainChanged",
+        chainId: parseInt(newChainId).toString(),
+        balance: balanceInEther.toFixed(4),
+      });
     });
   };
 };
